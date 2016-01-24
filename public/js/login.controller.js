@@ -1,6 +1,6 @@
 (function () {
 	angular
-		.module('app')
+		.module('irc')
 		.controller('LoginController', LoginController);
 
 		function LoginController() {
@@ -11,7 +11,7 @@
 
 			function login () {
 				vm.loggedIn = true;
-				vm.socket.emit('news', { hello: 'world' });
+				vm.socket.emit('login', { name: vm.mainName });
 			};
 		}
 })();

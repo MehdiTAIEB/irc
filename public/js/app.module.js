@@ -1,6 +1,6 @@
 (function () {
 	angular
-		.module('app', []); // maybe nothing
+		.module('irc', []); // maybe nothing
 })();
 /*
 user object

@@ -26,8 +26,9 @@ app.get('/', function (req, res) {
 });
 
 io.on('connection', function (socket) {
-	socket.on('news', function (data) {
-		console.log(data + 'asdasd');
+	socket.on('login', function (data) {
+		console.log(data.name);
+		socket.emit('setAuth', { name: data.name });
 	});
 });
 
