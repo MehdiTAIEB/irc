@@ -1,10 +1,7 @@
-(function() {
-	'use strict';
-
+(function () {
 	angular
 		.module('app', []); // maybe nothing
 })();
-
 /*
 user object
 current chans can be multiple --> create chan leave/join chan kick user from chan

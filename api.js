@@ -25,4 +25,10 @@ app.get('/', function (req, res) {
 	});
 });
 
+io.on('connection', function (socket) {
+	socket.on('news', function (data) {
+		console.log(data + 'asdasd');
+	});
+});
+
 server.listen(3000);

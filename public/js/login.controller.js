@@ -1,17 +1,17 @@
-(function() {
-	'use strict';
-
+(function () {
 	angular
 		.module('app')
 		.controller('LoginController', LoginController);
 
 		function LoginController() {
 			var vm = this;
+			vm.socket = io.connect();
+			vm.loggedIn = false;
 			vm.login = login;
-			vm.name = "singe";
 
 			function login () {
-				console.log(vm.mainName);
+				vm.loggedIn = true;
+				vm.socket.emit('news', { hello: 'world' });
 			};
 		}
 })();
