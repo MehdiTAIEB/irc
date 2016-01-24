@@ -31,7 +31,7 @@ app.use(function (req, res, next) {
 */
 
 app.get('/', function (req, res) {
-	res.render('login.html', {
+	res.render('index.html', {
 		pagename: 'awesome people', // testin variable
 	});
 });
