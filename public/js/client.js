@@ -13,11 +13,14 @@ object chan
 // socket.user =
 // {
 //	socket.mainName
-//	socket.chans {key = chan name : value = login in this chan} // handle tabs
+//	socket.chans {key = chan name : value = login in this chan default = mainName} // handle tabs
 //	socket. current feed/chan // for a selected tab
 //	socket. current nick // for a selected tab
 // }
-//
 // tabs = on click display feed by name get on tab value
 // if not selected tab get a new message light it ?
 // on the left navbarstyle
+
+
+
+// emit message with parameter that id user and feed then broadcast it to the chan
