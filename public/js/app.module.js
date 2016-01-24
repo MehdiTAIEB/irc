@@ -1,4 +1,9 @@
-alert('lol');
+(function() {
+	'use strict';
+
+	angular
+		.module('app', []); // maybe nothing
+})();
 
 /*
 user object
