@@ -19,20 +19,9 @@ swig.setDefaults({ cache: false});
  */
 app.use(express.static('public'));
 
-/*
- * not required when sever serve pages?
-app.use(function (req, res, next) {
-		res.setHeader('Access-Control-Allow-Origin', '*');
-		res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-		res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-		res.setHeader('Access-Control-Allow-Credentials', true);
-		next();
-});
-*/
-
 app.get('/', function (req, res) {
 	res.render('index.html', {
-		pagename: 'awesome people', // testin variable
+		title: 'My Irc', // testin variable
 	});
 });
 
