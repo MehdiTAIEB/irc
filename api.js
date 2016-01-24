@@ -30,7 +30,7 @@ app.use(function (req, res, next) {
 });
 */
 
-app.get('/', function(req, res){
+app.get('/', function (req, res) {
 	res.render('login.html', {
 		pagename: 'awesome people',
 	});
@@ -39,4 +39,3 @@ app.get('/', function(req, res){
 server.listen(3000, function () {
 	console.log('Example app listening on port 3000!');
 });
-
