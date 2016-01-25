@@ -1,6 +1,6 @@
 (function () {
 	angular
-		.module('irc', []); // maybe nothing
+		.module('irc', ['ngRoute']); // maybe nothing
 })();
 /*
 user object

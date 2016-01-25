@@ -18,6 +18,7 @@ swig.setDefaults({ cache: false});
  *
  */
 app.use(express.static('public'));
+app.use('/angular', express.static('view'));
 
 app.get('/', function (req, res) {
 	res.render('index.html', {
