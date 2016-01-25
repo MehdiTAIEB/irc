@@ -1,5 +1,7 @@
-alert('lol');
-
+(function () {
+	angular
+		.module('irc', ['ngRoute']); // maybe nothing
+})();
 /*
 user object
 current chans can be multiple --> create chan leave/join chan kick user from chan

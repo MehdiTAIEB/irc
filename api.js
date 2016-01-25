@@ -18,10 +18,19 @@ swig.setDefaults({ cache: false});
  *
  */
 app.use(express.static('public'));
+app.use('/angular', express.static('view'));
 
 app.get('/', function (req, res) {
 	res.render('index.html', {
 		title: 'My Irc', // testin variable
+	});
+});
+
+io.on('connection', function (socket) {
+	socket.on('login', function (data) { // supose to stock in socket object
+		if (data.name)
+			socket.mainName = data.name;
+		socket.emit('setAuth', { name: socket.mainName });
 	});
 });
 
