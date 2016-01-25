@@ -14,6 +14,9 @@
 			vm.socket.on('id', function (data) {
 				vm.mainName = data.id;
 			});
+			vm.socket.on('getMessage', function (data) {
+				console.log(data);
+			});
 
 			function send () {
 				vm.socket.emit('send', {
@@ -21,8 +24,6 @@
 					chan: vm.currentChan,
 					message: vm.message
 				});
-				console.log(vm.mainName);
-				console.log(vm.message); // emit on serve
 			}
 
 			$(".chat").niceScroll();// # sale

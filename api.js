@@ -3,7 +3,14 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var swig  = require('swig');
-
+var conversations = []; // store conv put watcher on it to broadcast messages "conv": { name: videogames, message: { from: me content: lol }}
+var availableCommand = {
+	nick : true,
+	join : true,
+	part : true,
+	users : true,
+	list : true
+};
 /*
  * Setup swig with express
  *
@@ -38,7 +45,57 @@ io.on('connection', function (socket) {
 	});
 
 	socket.on('send', function (data) {
-		console.log(data);
+		
+		firstChar = data.message.charAt(0);
+		if (firstChar == "/")
+		{
+			splittedMessage = data.message.split(" ");
+			if (splittedMessage.length > 2) // lenght sup a 2 = trop de parametre , if le premier == que /
+				console.log('to many parameter');
+			else if (splittedMessage.length == 1)
+			{
+				cleanCommand = splittedMessage[0].substr(1);
+				switch (cleanCommand)
+				{
+					case "nick":
+						if (availableCommand.nick)
+						{
+							console.log('nick');
+						}
+						break;
+					case "join":
+						if (availableCommand)
+						{
+							console.log('join');
+						}
+						break;
+					case "part":
+						if (availableCommand.part)
+						{
+							console.log('part');
+						}
+						break;
+					case "users":
+						if (availableCommand.users)
+						{
+							console.log('users');
+						}
+						break;
+					case "list":
+						if (availableCommand.list)
+						{
+							console.log('list');
+						}
+						break;
+				}
+			}
+			else if (splittedMessage.length == 2) // handle multiparameter command declare wich are
+			{
+				console.log('mult params');
+			}
+		}
+		else
+			console.log('pas une commande'); // message to store
 	});
 });
 
