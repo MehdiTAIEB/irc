@@ -9,14 +9,14 @@
 			var vm = this;
 			vm.socket = WebSocketService.init();
 			vm.login = login;
-			console.log(WebSocketService);
 
-
+			console.log($location);
 			function login () {
 				vm.socket.emit('login', { name: vm.mainName });
 				vm.socket.on('setAuth', function (data) {
-					console.log(data);
+					console.log(data.name);
 				});
+				$location.path('/lol');
 			};
 		}
 })();

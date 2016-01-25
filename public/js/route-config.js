@@ -11,6 +11,11 @@
 					templateUrl: 'angular/auth/login.html',
 					controller: 'LoginController',
 					controllerAs: 'vm'
-				});
+				})
+				.when('/lol', {
+					templateUrl: 'angular/dash/dash.html',
+					controller: 'DashController',
+					controllerAs: 'vm'
+				})
 		}
 })();
