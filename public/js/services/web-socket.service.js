@@ -7,9 +7,10 @@
 			var service = {
 				init: init
 			};
+			return service;
 
 			function init () {
-				return "service ok";
+				return "lol";
 			}
 		}
 })();
