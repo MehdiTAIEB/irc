@@ -8,7 +8,7 @@
 		function DashController($location, socket) {
 			var vm = this;
 			vm.socket = socket;
-
+			$(".chat").niceScroll();
 			console.log(vm.socket);
 		}
 })();
