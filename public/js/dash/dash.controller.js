@@ -3,13 +3,12 @@
 		.module('irc')
 		.controller('DashController', DashController);
 
-		function DashController() {
-			var vm = this;
-			vm.socket = io.connect();
+		DashController.$inject = ['$location', 'socket'];
 
-			vm.socket.on('setAuth', function (data) { // does work on login controller maybe allias?
-				console.log(data.name);
-				console.log('asda');
-			});
+		function DashController($location, socket) {
+			var vm = this;
+			vm.socket = socket;
+
+			console.log(vm.socket);
 		}
 })();

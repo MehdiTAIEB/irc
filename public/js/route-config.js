@@ -12,7 +12,7 @@
 					controller: 'LoginController',
 					controllerAs: 'vm'
 				})
-				.when('/lol', {
+				.when('/dash', {
 					templateUrl: 'angular/dash/dash.html',
 					controller: 'DashController',
 					controllerAs: 'vm'
