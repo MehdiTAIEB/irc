@@ -27,13 +27,18 @@ app.get('/', function (req, res) {
 });
 
 io.on('connection', function (socket) {
-	socket.on('login', function (data) { // supose to stock in socket object
-		console.log(data.name)
+	
+	socket.on('login', function (data) { // supose to stock in socket object // login
 		if (data.name)
 			socket.mainName = data.name;
 	});
-	socket.on('getId', function () {
+	
+	socket.on('getId', function () { // to get user info
 		socket.emit('id', { id: socket.mainName });
+	});
+
+	socket.on('send', function (data) {
+		console.log(data);
 	});
 });
 

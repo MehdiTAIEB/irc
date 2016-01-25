@@ -3,9 +3,9 @@
 		.module('irc')
 		.controller('DashController', DashController);
 
-		DashController.$inject = ['$location', 'socket'];
+		DashController.$inject = ['$scope', '$location', 'socket'];
 
-		function DashController($location, socket) {
+		function DashController($scope, $location, socket) {
 			var vm = this;
 			vm.socket = socket;
 			vm.send = send;
@@ -14,14 +14,14 @@
 			vm.socket.on('id', function (data) {
 				vm.mainName = data.id;
 			});
-			vm.example = [
-				{ name: "mehdi" },
-				{ name: "oussama"},
-				{ name: "samir"},
-				{ name: "ihab"}
-			];
 
 			function send () {
+				vm.socket.emit('send', {
+					from: vm.mainName,
+					chan: vm.currentChan,
+					message: vm.message
+				});
+				console.log(vm.mainName);
 				console.log(vm.message); // emit on serve
 			}
 
