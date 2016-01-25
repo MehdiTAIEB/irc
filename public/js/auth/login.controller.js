@@ -13,6 +13,6 @@
 			function login () {
 				vm.socket.emit('login', { name: vm.mainName });
 				$location.path('/dash');
-			};
+			}
 		}
 })();

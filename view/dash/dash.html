@@ -21,6 +21,11 @@
 			<div class="col-inside-lg decor-default">
 				<div class="chat-body">
 					<h6>Mini Chat</h6>
+					<div ng-repeat="(key, value) in vm.example">
+						{{ key }}
+						{{ value }}
+						{{ value.name }}
+					</div>
 					<div class="answer left">
 						<div class="avatar">
 							<img src="http://91.234.35.26/iwiki-admin/v1.0.0/admin/img/images/chat/40-2.png" alt="User name">
@@ -65,10 +70,9 @@
 					</div>
 					<div class="time">5 min ago</div>
 				</div>
-				<div class="answer-add">
-					<input placeholder="Write a message">
-					<span class="answer-btn answer-btn-1"></span>
-					<span class="answer-btn answer-btn-2"></span>
+				<form class="answer-add" name="form" ng-submit="vm.send()" role="form">
+					<input placeholder="Write a message" ng-model="vm.message">
+					<span type="submit" class="answer-btn answer-btn-2"></span>
 				</div>
 			</div>
 		</div>
