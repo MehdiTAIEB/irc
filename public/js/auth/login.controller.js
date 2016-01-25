@@ -10,7 +10,6 @@
 			vm.socket = WebSocketService.init();
 			vm.login = login;
 
-			console.log($location);
 			function login () {
 				vm.socket.emit('login', { name: vm.mainName });
 				vm.socket.on('setAuth', function (data) {
