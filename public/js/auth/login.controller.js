@@ -7,15 +7,16 @@
 
 		function LoginController($location, WebSocketService) {
 			var vm = this;
-			vm.socket = io.connect();
+			vm.socket = WebSocketService.init();
 			vm.login = login;
 			console.log(WebSocketService);
 
 
 			function login () {
-				vm.test = WebSocketService.init();
-				console.log(vm.test);
 				vm.socket.emit('login', { name: vm.mainName });
+				vm.socket.on('setAuth', function (data) {
+					console.log(data);
+				});
 			};
 		}
 })();

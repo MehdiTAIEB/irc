@@ -10,7 +10,7 @@
 			return service;
 
 			function init () {
-				return "lol";
+				return io.connect();
 			}
 		}
 })();
