@@ -28,9 +28,12 @@ app.get('/', function (req, res) {
 
 io.on('connection', function (socket) {
 	socket.on('login', function (data) { // supose to stock in socket object
+		console.log(data.name)
 		if (data.name)
 			socket.mainName = data.name;
-		socket.emit('setAuth', { name: socket.mainName });
+	});
+	socket.on('getId', function () {
+		socket.emit('id', { id: socket.mainName });
 	});
 });
 

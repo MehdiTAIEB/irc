@@ -8,7 +8,11 @@
 		function DashController($location, socket) {
 			var vm = this;
 			vm.socket = socket;
+
+			vm.socket.emit('getId', {});
+			vm.socket.on('id', function (data) {
+				vm.mainName = data.id;
+			});
 			$(".chat").niceScroll();
-			console.log(vm.socket);
 		}
 })();
