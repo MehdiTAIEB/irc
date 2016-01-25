@@ -3,13 +3,15 @@
 		.module('irc')
 		.controller('LoginController', LoginController);
 
-		function LoginController() {
+		LoginController.$inject = ['WebSocketService'];
+
+		function LoginController(WebSocketService) {
 			var vm = this;
 			vm.socket = io.connect();
 			vm.login = login;
 
 			function login () {
-				console.log('asd');
+				WebSocketService.init();
 				vm.socket.emit('login', { name: vm.mainName });
 			};
 		}
