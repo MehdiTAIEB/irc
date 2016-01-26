@@ -9,7 +9,8 @@ var availableCommand = {
 	join : true,
 	part : true,
 	users : true,
-	list : true
+	list : true,
+	msg: true
 };
 /*
  * Setup swig with express
@@ -47,12 +48,12 @@ io.on('connection', function (socket) {
 	socket.on('send', function (data) {
 		
 		firstChar = data.message.charAt(0);
-		if (firstChar == "/")
+		if (firstChar == "/") // command interpretation
 		{
-			splittedMessage = data.message.split(" ");
+			splittedMessage = data.message.split(" "); // split to check parameter number and get parameters
 			if (splittedMessage.length > 2) // lenght sup a 2 = trop de parametre , if le premier == que /
 				console.log('to many parameter');
-			else if (splittedMessage.length == 1)
+			else if (splittedMessage.length == 2) // command with parameter
 			{
 				cleanCommand = splittedMessage[0].substr(1);
 				switch (cleanCommand)
@@ -69,29 +70,36 @@ io.on('connection', function (socket) {
 							console.log('join');
 						}
 						break;
-					case "part":
-						if (availableCommand.part)
-						{
-							console.log('part');
-						}
-						break;
-					case "users":
-						if (availableCommand.users)
-						{
-							console.log('users');
-						}
-						break;
 					case "list":
-						if (availableCommand.list)
+						if (availableCommand.list) // list available chan avec un like fait sur le param 2
 						{
 							console.log('list');
 						}
 						break;
+					case "msg":
+						if (availableCommand.msg)
+						{ // check if user is logged in
+							console.log('msg to one person');
+						}
+					default:
+						console.log('unknown command');
 				}
 			}
-			else if (splittedMessage.length == 2) // handle multiparameter command declare wich are
+			else if (splittedMessage.length == 1) // handle multiparameter command declare wich are
 			{
-				console.log('mult params');
+				cleanCommand = splittedMessage[0].substr(1);
+				switch (cleanCommand)
+				{
+					case "part":
+						//leave channel clean zone
+						break;
+					case "users":
+						// list all in a chan
+						break;
+					case "list":
+						// list chan available
+						break;
+				}
 			}
 		}
 		else
