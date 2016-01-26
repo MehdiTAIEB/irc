@@ -61,19 +61,19 @@ io.on('connection', function (socket) {
 					case "nick":
 						if (availableCommand.nick)
 						{
-							console.log('nick');
+							console.log('change nickname');
 						}
 						break;
 					case "join":
 						if (availableCommand)
 						{
-							console.log('join');
+							console.log('join a channel');
 						}
 						break;
 					case "list":
 						if (availableCommand.list) // list available chan avec un like fait sur le param 2
 						{
-							console.log('list');
+							console.log('list + like pattern');
 						}
 						break;
 					case "msg":
@@ -91,14 +91,25 @@ io.on('connection', function (socket) {
 				switch (cleanCommand)
 				{
 					case "part":
-						//leave channel clean zone
+						if (availableCommand.part)
+						{
+							console.log('leave current chan');
+						}
 						break;
 					case "users":
-						// list all in a chan
+						if (availableCommand.users)
+						{
+							console.log('display all users in this chan');
+						}
 						break;
 					case "list":
-						// list chan available
+						if (availableCommand.list)
+						{
+							console.log('list available chans');
+						}
 						break;
+					default:
+						console.log('unknown command');
 				}
 			}
 		}
