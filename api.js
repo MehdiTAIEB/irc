@@ -12,6 +12,15 @@ var availableCommand = {
 	list : true,
 	msg: true
 };
+
+var chans = [
+	"voyages",
+	"famille",
+	"hack",
+	"internet"
+];
+
+var users = [];
 /*
  * Setup swig with express
  *
@@ -38,17 +47,30 @@ io.on('connection', function (socket) {
 	
 	socket.on('login', function (data) { // supose to stock in socket object // login
 		if (data.name)
+		{
 			socket.mainName = data.name;
+			users.push({ name: data.name });
+		}
 	});
 	
 	socket.on('getId', function () { // to get user info
 		socket.emit('id', { id: socket.mainName });
 	});
 
+	socket.on('getChans', function () {
+		socket.emit('chans', { chans: chans });
+	});
+
+	socket.on('setNewChan', function (data) {
+		chans.push(data.name);
+		socket.emit('chans', { chans: chans })
+	});
 	socket.on('send', function (data) {
-		
+
 		firstChar = data.message.charAt(0);
-		if (firstChar == "/") // command interpretation
+		if (firstChar !== "/")
+			socket.emit('getMessage', { data: data }); // brodcast
+		else // command interpretation
 		{
 			splittedMessage = data.message.split(" "); // split to check parameter number and get parameters
 			if (splittedMessage.length > 2) // lenght sup a 2 = trop de parametre , if le premier == que /
@@ -65,9 +87,25 @@ io.on('connection', function (socket) {
 						}
 						break;
 					case "join":
-						if (availableCommand)
+						if (availableCommand.join)
 						{
-							console.log('join a channel');
+							var ok = 0;
+							for (var i = 0;i < chans.length;i++)
+							{
+								if (chans[i] == splittedMessage[1])
+									ok = 1;
+							}
+							if (ok)
+							{
+								socket.emit('getMessage', { chan: "" });
+								socket.emit('setCurrentChan', { chan: splittedMessage[1] });
+							}
+							else
+							{
+								chans.push(splittedMessage[1]);
+								socket.emit('setCurrentChan', { chan: splittedMessage[1] });
+								socket.emit('chans', { chans: chans });
+							}
 						}
 						break;
 					case "list":
@@ -81,8 +119,9 @@ io.on('connection', function (socket) {
 						{ // check if user is logged in
 							console.log('msg to one person');
 						}
+						break;
 					default:
-						console.log('unknown command');
+						console.log('unknown command for 2 params');
 				}
 			}
 			else if (splittedMessage.length == 1) // handle multiparameter command declare wich are
@@ -109,12 +148,10 @@ io.on('connection', function (socket) {
 						}
 						break;
 					default:
-						console.log('unknown command');
+						console.log('unknown command for one parameter');
 				}
 			}
 		}
-		else
-			console.log('pas une commande'); // message to store
 	});
 });
 

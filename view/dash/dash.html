@@ -5,75 +5,34 @@
 		<div class="col-sm-3 col-xs-12">
 			<div class="col-inside-lg decor-default chat" style="overflow: hidden; outline: none;" tabindex="5000">
 				<div class="chat-users">
-					<h6>Online</h6> <!-- chan list -->
-					<div class="user">
-						<div class="avatar">
-							<img src="http://91.234.35.26/iwiki-admin/v1.0.0/admin/img/images/chat/40-3.png" alt="User name">
-							<div class="status off"></div>
+					<h6>Chans</h6> <!-- chan list -->
+					<div ng-repeat="chan in vm.chans">
+						<div class="user">
+							<div class="name">{{ chan }}</div> <!-- ngclick to trigger tab change -->
 						</div>
-						<div class="name">User name</div>
-						<div class="mood">User mood</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="col-sm-9 col-xs-12 chat" style="overflow: hidden; outline: none;" tabindex="5001">
-			<div class="col-inside-lg decor-default">
+			<div class="col-inside-lg decor-default" style="min-height:800px;">
 				<div class="chat-body">
-					<h6>Mini Chat</h6>
-					<div ng-repeat="(key, value) in vm.example">
-						{{ key }}
-						{{ value }}
-						{{ value.name }}
+					<h6>{{ vm.currentChan }}</h6>
+					<div class="jumbotron" ng-show="vm.emptyMessage">
 					</div>
+					<div ng-repeat="msg in vm.messages">
 					<div class="answer left">
-						<div class="avatar">
-							<img src="http://91.234.35.26/iwiki-admin/v1.0.0/admin/img/images/chat/40-2.png" alt="User name">
-							<div class="status offline"></div>
-						</div>
-						<div class="name">Alexander Herthic</div>
+						<div class="name">{{ msg.from }}</div>
 						<div class="text">
-							Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur adiping elit
+							{{ msg.content }}
 						</div>
-						<div class="time">5 min ago</div>
+						<div class="time"></div>
 					</div>
-					<div class="answer right">
-						<div class="avatar">
-							<img src="http://91.234.35.26/iwiki-admin/v1.0.0/admin/img/images/chat/40.png" alt="User name">
-							<div class="status offline"></div>
-						</div>
-						<div class="name">Alexander Herthic</div>
-						<div class="text">
-							Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur adiping elit
-						</div>
-						<div class="time">5 min ago</div>
 					</div>
-				<div class="answer left">
-					<div class="avatar">
-						<img src="http://91.234.35.26/iwiki-admin/v1.0.0/admin/img/images/chat/40-2.png" alt="User name">
-						<div class="status online"></div>
-					</div>
-					<div class="name">Alexander Herthic</div>
-					<div class="text">
-						...
-					</div>
-					<div class="time">5 min ago</div>
-				</div>
-				<div class="answer right">
-					<div class="avatar">
-						<img src="http://91.234.35.26/iwiki-admin/v1.0.0/admin/img/images/chat/40.png" alt="User name">
-						<div class="status busy"></div>
-					</div>
-					<div class="name">Alexander Herthic</div>
-					<div class="text">
-						It is a long established fact that a reader will be. Thanks Mate!
-					</div>
-					<div class="time">5 min ago</div>
-				</div>
-				<form class="answer-add" name="form" ng-submit="vm.send()" role="form">
+				<form class="answer-add" name="form" id="form" ng-submit="vm.send()" role="form">
 					<input placeholder="Write a message" ng-model="vm.message">
 					<span type="submit" class="answer-btn answer-btn-2"></span>
-				</div>
+				</form>
 			</div>
 		</div>
 	</div>
