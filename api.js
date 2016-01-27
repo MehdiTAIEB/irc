@@ -3,7 +3,7 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var swig  = require('swig');
-var conversations = []; // store conv put watcher on it to broadcast messages "conv": { name: videogames, message: { from: me content: lol }}
+
 var availableCommand = {
 	nick : true,
 	join : true,
@@ -19,6 +19,8 @@ var chans = [
 	"hack",
 	"internet"
 ];
+
+var conv = [];
 
 var users = [];
 /*
@@ -69,7 +71,13 @@ io.on('connection', function (socket) {
 
 		firstChar = data.message.charAt(0);
 		if (firstChar !== "/")
+		{
+			if (!conv[data.chan])
+				conv[data.chan] = []; // if not already
+			conv[data.chan].push({ from: data.from, msg: data.message});
+			console.log(conv);
 			socket.emit('getMessage', { data: data }); // brodcast
+		}
 		else // command interpretation
 		{
 			splittedMessage = data.message.split(" "); // split to check parameter number and get parameters
@@ -105,6 +113,7 @@ io.on('connection', function (socket) {
 								chans.push(splittedMessage[1]);
 								socket.emit('setCurrentChan', { chan: splittedMessage[1] });
 								socket.emit('chans', { chans: chans });
+								//conversations[splittedMessage[1]] = [];
 							}
 						}
 						break;

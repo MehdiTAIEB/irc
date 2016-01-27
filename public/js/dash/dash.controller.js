@@ -28,8 +28,12 @@
 					});
 				else
 				{
+					console.log(data);
 					$scope.$apply(function () {
-						vm.messages.push({ from: data.from, content: data.message});
+						if (!vm.messages[data.chan])
+							vm.messages[data.chan] = [];
+						vm.messages[data.chan].push({ from: data.from, content: data.message});
+						console.log(vm.messages);
 					});
 					$location.hash();
 					$anchorScroll();
