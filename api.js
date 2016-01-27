@@ -52,6 +52,7 @@ io.on('connection', function (socket) {
 		{
 			socket.mainName = data.name;
 			users.push({ name: data.name });
+			socket.broadcast.emit('newUser', { users: users }); // broadcast
 		}
 	});
 	
@@ -68,7 +69,6 @@ io.on('connection', function (socket) {
 		socket.emit('chans', { chans: chans })
 	});
 	socket.on('send', function (data) {
-
 		firstChar = data.message.charAt(0);
 		if (firstChar !== "/")
 		{
@@ -76,7 +76,8 @@ io.on('connection', function (socket) {
 				conv[data.chan] = []; // if not already
 			conv[data.chan].push({ from: data.from, msg: data.message});
 			console.log(conv);
-			socket.emit('getMessage', { data: data }); // brodcast
+			socket.emit('getMessage', { data: data });
+			socket.broadcast.emit('getMessage', { data: data }); // brodcast
 		}
 		else // command interpretation
 		{
@@ -112,6 +113,7 @@ io.on('connection', function (socket) {
 							{
 								chans.push(splittedMessage[1]);
 								socket.emit('setCurrentChan', { chan: splittedMessage[1] });
+								socket.broadcast.emit('chans', { chans: chans });
 								socket.emit('chans', { chans: chans });
 								//conversations[splittedMessage[1]] = [];
 							}

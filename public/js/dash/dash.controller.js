@@ -13,17 +13,25 @@
 			vm.emptyMessage = true;
 			vm.messages = [];
 			vm.chans = [];
+			vm.joinedChans = [];
+			vm.users = [];
 
 			vm.socket.emit('getId', {});
 			vm.socket.on('id', function (data) {
 				vm.mainName = data.id;
 			});
 			
+			vm.socket.on('newUser', function (data) {
+				$scope.$apply(function () {
+					vm.users = data.users;
+				});
+				console.log(vm.users);
+			});
 			vm.socket.on('getMessage', function (data) {
 				data = data.data;
 				vm.emptyMessage = false;
 				if (!data)
-					$scope.$apply(function() {
+					$scope.$apply(function () {
 						vm.messages = [];
 					});
 				else
@@ -31,8 +39,9 @@
 					$scope.$apply(function () {
 						if (!vm.messages[data.chan])
 							vm.messages[data.chan] = [];
-						vm.messages[data.chan].push({ from: data.from, content: data.message});
-						console.log(vm.messages);
+						if (vm.joinedChans[data.chan])
+							vm.messages[data.chan].push({ from: data.from, content: data.message});
+						console.log(vm.joinedChans);
 					});
 					$location.hash();
 					$anchorScroll();
@@ -42,6 +51,8 @@
 			vm.socket.on('setCurrentChan', function (data) {
 				$scope.$apply(function () {
 					vm.currentChan = data.chan;
+					if (!vm.joinedChans[data.chan])
+						vm.joinedChans[data.chan] = true;
 				});
 			});
 

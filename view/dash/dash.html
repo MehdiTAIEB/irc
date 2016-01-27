@@ -11,6 +11,12 @@
 							<div class="name">{{ chan }}</div> <!-- ngclick to trigger tab change -->
 						</div>
 					</div>
+					<h6>Users</h6>
+					<div ng-repeat="user in vm.users">
+						<div class="user">
+							<div class="name">{{ user.name }}</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
