@@ -44,7 +44,10 @@
 						if (!vm.messages[data.chan])
 							vm.messages[data.chan] = [];
 						if (vm.joinedChans[data.chan])
+						{
 							vm.messages[data.chan].push({ from: data.from, content: data.message});
+							//vm.messages[data.chan]['nick'] = data.from; here to handle the fact that keep nickname when change channel
+						}
 					});
 					$location.hash();
 					$anchorScroll();
@@ -75,7 +78,7 @@
 				}
 				else
 				{
-					var alias = vm.nick ? vm.nick : vm.mainName;
+					var alias = vm.nick ? vm.nick : vm.mainName; // change nick process to get it from vm.mess[////][nick]
 					vm.socket.emit('send', {
 						from: alias,
 						message: vm.message,
