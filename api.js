@@ -116,9 +116,8 @@ io.on('connection', function (socket) {
 								socket.emit('setCurrentChan', { chan: splittedMessage[1] });
 								socket.broadcast.emit('chans', { chans: chans });
 								socket.emit('chans', { chans: chans });
-								//conversations[splittedMessage[1]] = [];
 							}
-							socket.emit('id', { id: data.from });
+							socket.emit('id', { id: socket.mainName });
 						}
 						break;
 					case "list":

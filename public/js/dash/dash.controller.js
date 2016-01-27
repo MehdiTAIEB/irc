@@ -25,18 +25,18 @@
 					vm.nick = data.id;
 			});
 			
-			vm.socket.on('newUser', function (data) {
+			vm.socket.on('newUser', function (data) { // on construction
 				$scope.$apply(function () {
 					vm.users = data.users;
 				});
-				console.log(vm.users);
 			});
 			vm.socket.on('getMessage', function (data) {
 				data = data.data;
 				vm.emptyMessage = false;
+
 				if (!data)
 					$scope.$apply(function () {
-						vm.messages = [];
+						vm.messages[data.chan] = [];
 					});
 				else
 				{
@@ -45,7 +45,6 @@
 							vm.messages[data.chan] = [];
 						if (vm.joinedChans[data.chan])
 							vm.messages[data.chan].push({ from: data.from, content: data.message});
-						console.log(vm.joinedChans);
 					});
 					$location.hash();
 					$anchorScroll();
@@ -77,7 +76,6 @@
 				else
 				{
 					var alias = vm.nick ? vm.nick : vm.mainName;
-					console.log(alias);
 					vm.socket.emit('send', {
 						from: alias,
 						message: vm.message,
