@@ -28,7 +28,6 @@
 					});
 				else
 				{
-					console.log(data);
 					$scope.$apply(function () {
 						if (!vm.messages[data.chan])
 							vm.messages[data.chan] = [];
