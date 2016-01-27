@@ -107,7 +107,7 @@ io.on('connection', function (socket) {
 							}
 							if (ok)
 							{
-								socket.emit('getMessage', { chan: "" });
+								//socket.emit('getMessage', { chan: "" }); // useless?
 								socket.emit('setCurrentChan', { chan: splittedMessage[1] });
 							}
 							else

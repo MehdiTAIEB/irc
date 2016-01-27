@@ -34,9 +34,9 @@
 				data = data.data;
 				vm.emptyMessage = false;
 
-				if (!data)
+				if (!data) // verify if useless or not
 					$scope.$apply(function () {
-						vm.messages[data.chan] = [];
+						vm.messages[vm.currentChan] = [];
 					});
 				else
 				{
