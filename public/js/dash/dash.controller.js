@@ -13,12 +13,16 @@
 			vm.emptyMessage = true;
 			vm.messages = [];
 			vm.chans = [];
+			vm.nick = "";
 			vm.joinedChans = [];
 			vm.users = [];
 
 			vm.socket.emit('getId', {});
 			vm.socket.on('id', function (data) {
-				vm.mainName = data.id;
+				if (!vm.mainName)
+					vm.mainName = data.id;
+				else
+					vm.nick = data.id;
 			});
 			
 			vm.socket.on('newUser', function (data) {
@@ -71,11 +75,15 @@
 					vm.messages.push({ content: "no chan selected" });
 				}
 				else
+				{
+					var alias = vm.nick ? vm.nick : vm.mainName;
+					console.log(alias);
 					vm.socket.emit('send', {
-						from: vm.mainName,
+						from: alias,
 						message: vm.message,
 						chan: vm.currentChan
 					});
+				}
 				vm.message = "";
 			}
 		$(".chat").niceScroll();

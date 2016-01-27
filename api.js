@@ -93,6 +93,7 @@ io.on('connection', function (socket) {
 						if (availableCommand.nick)
 						{
 							console.log('change nickname');
+							socket.emit('id', { id: splittedMessage[1]});
 						}
 						break;
 					case "join":
@@ -106,7 +107,7 @@ io.on('connection', function (socket) {
 							}
 							if (ok)
 							{
-								//socket.emit('getMessage', { chan: "" });
+								socket.emit('getMessage', { chan: "" });
 								socket.emit('setCurrentChan', { chan: splittedMessage[1] });
 							}
 							else
@@ -117,6 +118,7 @@ io.on('connection', function (socket) {
 								socket.emit('chans', { chans: chans });
 								//conversations[splittedMessage[1]] = [];
 							}
+							socket.emit('id', { id: data.from });
 						}
 						break;
 					case "list":
