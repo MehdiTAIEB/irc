@@ -123,7 +123,15 @@ io.on('connection', function (socket) {
 					case "list":
 						if (availableCommand.list) // list available chan avec un like fait sur le param 2
 						{
-							console.log('list + like pattern');
+							var sc = [];
+							for (var i = 0; i < chans.length; i++)
+							{
+								if (chans[i].indexOf(splittedMessage[1]) > -1)
+									sc.push(chans[i]);
+							}
+							if (sc.push)
+								socket.emit('listChans', { chans: sc});
+							console.log(sc); //reg exp
 						}
 						break;
 					case "msg":
@@ -156,7 +164,7 @@ io.on('connection', function (socket) {
 					case "list":
 						if (availableCommand.list)
 						{
-							console.log('list available chans');
+							socket.emit('listChans', { chans: chans } );
 						}
 						break;
 					default:

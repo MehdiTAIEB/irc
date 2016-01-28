@@ -24,13 +24,14 @@
 			<div class="col-inside-lg decor-default" style="min-height:800px;">
 				<div class="chat-body">
 					<h6>{{ vm.currentChan }}</h6>
-					<div class="jumbotron" ng-show="vm.emptyMessage">
-					</div>
 					<div ng-repeat="msg in vm.messages[vm.currentChan]">
 					<div class="answer left">
 						<div class="name">{{ msg.from }}</div>
-						<div class="text">
-							{{ msg.content }}
+						<div class="text" ng-show="msg.content">
+							{{ msg.content}}
+						</div>
+						<div class="text" ng-show="msg.chans" ng-repeat="chan in msg.chans">
+							{{ chan }}
 						</div>
 						<div class="time"></div>
 					</div>

@@ -9,7 +9,7 @@
 			var vm = this;
 			vm.socket = socket;
 			vm.send = send;
-			vm.currentChan = "";
+			vm.currentChan = "home";
 			vm.emptyMessage = true;
 			vm.messages = [];
 			vm.chans = [];
@@ -53,7 +53,17 @@
 					$anchorScroll();
 				}
 			});
-
+			vm.socket.on('listChans', function (data) {
+				if (data.chans)
+				{
+					console.log(data.chans);
+					if (!vm.messages[vm.currentChan])
+						vm.messages[vm.currentChan] = [];
+					$scope.$apply(function () {
+						vm.messages[vm.currentChan].push({ from: 'server', chans: data.chans });
+					});
+				}
+			});
 			vm.socket.on('setCurrentChan', function (data) {
 				$scope.$apply(function () {
 					vm.currentChan = data.chan;
