@@ -16,7 +16,27 @@
 			vm.nick = "";
 			vm.joinedChans = [];
 			vm.users = [];
+		
+			vm.socket.on('test', function (data) {
+				if (data.lol.to == vm.mainName)
+					$scope.$apply(function () {
+						console.log(data.lol.user);
+						if (!vm.usersInCurrentChan)
+							vm.usersInCurrentChan = [];
+						var ok = false;
+						if ($.inArray(data.lol.user, vm.usersInCurrentChan) == -1)
+							ok = true
+						console.log(ok);
+						if (ok)
+							vm.usersInCurrentChan.push(data.lol.user);
+						console.log(vm.usersInCurrentChan);// clean if /users again
+					})
+			});
 
+			vm.socket.on('getAllCurrent', function (data) {
+				if (vm.currentChan == data.chan) // if in requested chan send pseudo ??? find a way to store it
+					socket.emit('usersInChan', { user: vm.mainName, to: data.to});
+			});
 			vm.socket.emit('getId', {});
 			vm.socket.on('id', function (data) {
 				if (!vm.mainName)
@@ -95,6 +115,7 @@
 						chan: vm.currentChan
 					});
 				}
+				vm.usersInCurrentChan = [];
 				vm.message = "";
 			}
 		$(".chat").niceScroll();
