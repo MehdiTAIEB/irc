@@ -1,142 +1,46 @@
+<h1><small>logged as <span ng-bind="vm.mainName"></span></small></h1>
 <link rel="stylesheet" href="http://localhost:3000/style/messenger.css">
 <div class="content container-fluid bootstrap snippets">
-      <div class="row row-broken">
-        <div class="col-sm-3 col-xs-12">
-          <div class="col-inside-lg decor-default chat" style="overflow: hidden; outline: none;" tabindex="5000">
-            <div class="chat-users">
-				<h6>Online</h6> <!-- chan list -->
-                <div class="user">
-                    <div class="avatar">
-                    <img src="http://91.234.35.26/iwiki-admin/v1.0.0/admin/img/images/chat/40-3.png" alt="User name">
-                    <div class="status off"></div>
-                    </div>
-                    <div class="name">User name</div>
-                    <div class="mood">User mood</div>
-                </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-9 col-xs-12 chat" style="overflow: hidden; outline: none;" tabindex="5001">
-          <div class="col-inside-lg decor-default">
-            <div class="chat-body">
-              <h6>Mini Chat</h6>
-              <div class="answer left">
-                <div class="avatar">
-                  <img src="http://91.234.35.26/iwiki-admin/v1.0.0/admin/img/images/chat/40-2.png" alt="User name">
-                  <div class="status offline"></div>
-                </div>
-                <div class="name">Alexander Herthic</div>
-                <div class="text">
-                  Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur adiping elit
-                </div>
-                <div class="time">5 min ago</div>
-              </div>
-              <div class="answer right">
-                <div class="avatar">
-                  <img src="http://91.234.35.26/iwiki-admin/v1.0.0/admin/img/images/chat/40.png" alt="User name">
-                  <div class="status offline"></div>
-                </div>
-                <div class="name">Alexander Herthic</div>
-                <div class="text">
-                  Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur adiping elit
-                </div>
-                <div class="time">5 min ago</div>
-              </div>
-              <div class="answer left">
-                <div class="avatar">
-                  <img src="http://91.234.35.26/iwiki-admin/v1.0.0/admin/img/images/chat/40-2.png" alt="User name">
-                  <div class="status online"></div>
-                </div>
-                <div class="name">Alexander Herthic</div>
-                <div class="text">
-                  ...
-                </div>
-                <div class="time">5 min ago</div>
-              </div>
-              <div class="answer right">
-                <div class="avatar">
-                  <img src="http://91.234.35.26/iwiki-admin/v1.0.0/admin/img/images/chat/40.png" alt="User name">
-                  <div class="status busy"></div>
-                </div>
-                <div class="name">Alexander Herthic</div>
-                <div class="text">
-                  It is a long established fact that a reader will be. Thanks Mate!
-                </div>
-                <div class="time">5 min ago</div>
-              </div>
-              <div class="answer right">
-                <div class="avatar">
-                  <img src="http://91.234.35.26/iwiki-admin/v1.0.0/admin/img/images/chat/40.png" alt="User name">
-                  <div class="status off"></div>
-                </div>
-                <div class="name">Alexander Herthic</div>
-                <div class="text">
-                  It is a long established fact that a reader will be. Thanks Mate!
-                </div>
-                <div class="time">5 min ago</div>
-              </div>
-              <div class="answer left">
-                <div class="avatar">
-                  <img src="http://91.234.35.26/iwiki-admin/v1.0.0/admin/img/images/chat/40-2.png" alt="User name">
-                  <div class="status offline"></div>
-                </div>
-                <div class="name">Alexander Herthic</div>
-                <div class="text">
-                  Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur adiping elit
-                </div>
-                <div class="time">5 min ago</div>
-              </div>
-              <div class="answer right">
-                <div class="avatar">
-                  <img src="http://91.234.35.26/iwiki-admin/v1.0.0/admin/img/images/chat/40.png" alt="User name">
-                  <div class="status offline"></div>
-                </div>
-                <div class="name">Alexander Herthic</div>
-                <div class="text">
-                  Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur adiping elit
-                </div>
-                <div class="time">5 min ago</div>
-              </div>
-              <div class="answer left">
-                <div class="avatar">
-                  <img src="http://91.234.35.26/iwiki-admin/v1.0.0/admin/img/images/chat/40-2.png" alt="User name">
-                  <div class="status online"></div>
-                </div>
-                <div class="name">Alexander Herthic</div>
-                <div class="text">
-                  ...
-                </div>
-                <div class="time">5 min ago</div>
-              </div>
-              <div class="answer right">
-                <div class="avatar">
-                  <img src="http://91.234.35.26/iwiki-admin/v1.0.0/admin/img/images/chat/40.png" alt="User name">
-                  <div class="status busy"></div>
-                </div>
-                <div class="name">Alexander Herthic</div>
-                <div class="text">
-                  It is a long established fact that a reader will be. Thanks Mate!
-                </div>
-                <div class="time">5 min ago</div>
-              </div>
-              <div class="answer right">
-                <div class="avatar">
-                  <img src="http://91.234.35.26/iwiki-admin/v1.0.0/admin/img/images/chat/40.png" alt="User name">
-                  <div class="status off"></div>
-                </div>
-                <div class="name">Alexander Herthic</div>
-                <div class="text">
-                  It is a long established fact that a reader will be. Thanks Mate!
-                </div>
-                <div class="time">5 min ago</div>
-              </div>
-              <div class="answer-add">
-                <input placeholder="Write a message">
-                <span class="answer-btn answer-btn-1"></span>
-                <span class="answer-btn answer-btn-2"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+	<div class="row row-broken">
+		<div class="col-sm-3 col-xs-12">
+			<div class="col-inside-lg decor-default chat" style="overflow: hidden; outline: none;" tabindex="5000">
+				<div class="chat-users">
+					<h6>Chans</h6> <!-- chan list -->
+					<div ng-repeat="chan in vm.chans">
+						<div class="user">
+							<div class="name">{{ chan }}</div> <!-- ngclick to trigger tab change -->
+						</div>
+					</div>
+					<h6>Users</h6>
+					<div ng-repeat="user in vm.users">
+						<div class="user">
+							<div class="name">{{ user.name }}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-9 col-xs-12 chat" style="overflow: hidden; outline: none;" tabindex="5001">
+			<div class="col-inside-lg decor-default" style="min-height:800px;">
+				<div class="chat-body">
+					<h6>{{ vm.currentChan }}</h6>
+					<div ng-repeat="msg in vm.messages[vm.currentChan]">
+					<div class="answer left">
+						<div class="name">{{ msg.from }}</div>
+						<div class="text" ng-show="msg.content">
+							{{ msg.content}}
+						</div>
+						<div class="text" ng-show="msg.chans" ng-repeat="chan in msg.chans">
+							{{ chan }}
+						</div>
+						<div class="time"></div>
+					</div>
+					</div>
+				<form class="answer-add" name="form" id="form" ng-submit="vm.send()" role="form">
+					<input placeholder="Write a message" ng-model="vm.message">
+					<span type="submit" class="answer-btn answer-btn-2"></span>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
