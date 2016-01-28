@@ -115,7 +115,8 @@
 						chan: vm.currentChan
 					});
 				}
-				vm.usersInCurrentChan = [];
+				if (vm.usersInCurrentChan)
+					vm.usersInCurrentChan = false;
 				vm.message = "";
 			}
 		$(".chat").niceScroll();
