@@ -48,7 +48,6 @@ app.get('/', function (req, res) {
 io.on('connection', function (socket) {
 	
 	socket.on('usersInChan', function (data) {
-		console.log(data, 'asd');
 		socket.broadcast.emit('final', { lol: data});
 	});
 	socket.on('login', function (data) { // supose to stock in socket object // login
@@ -79,7 +78,6 @@ io.on('connection', function (socket) {
 			if (!conv[data.chan])
 				conv[data.chan] = []; // if not already
 			conv[data.chan].push({ from: data.from, msg: data.message});
-			console.log(conv);
 			socket.emit('getMessage', { data: data });
 			socket.broadcast.emit('getMessage', { data: data }); // brodcast
 		}
@@ -93,7 +91,6 @@ io.on('connection', function (socket) {
 				cCommand = splittedMessage[0].substr(1);
 				if (cCommand == 'msg')
 					socket.broadcast.emit('personal', { from: socket.mainName, to: splittedMessage[1], content: splittedMessage[2]});
-				console.log(splittedMessage);
 				
 			}
 			else if (splittedMessage.length == 2) // command with parameter
@@ -143,7 +140,6 @@ io.on('connection', function (socket) {
 							}
 							if (sc.push)
 								socket.emit('listChans', { chans: sc});
-							console.log(sc); //reg exp
 						}
 						break;
 					case "msg":
@@ -154,6 +150,7 @@ io.on('connection', function (socket) {
 						}
 						break;
 					default:
+						socket.emit('logs', { log: 'unknown command for two parameter command'});
 						console.log('unknown command for 2 params');
 				}
 			}
@@ -184,6 +181,7 @@ io.on('connection', function (socket) {
 						}
 						break;
 					default:
+						socket.emit('logs', { log: 'unknown command for one parameter command'});
 						console.log('unknown command for one parameter');
 				}
 			}

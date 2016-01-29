@@ -16,20 +16,17 @@
 			vm.nick = "";
 			vm.joinedChans = [];
 			vm.users = [];
-		
+
 			vm.socket.on('final', function (data) {
 				if (data.lol.to == vm.mainName)
 					$scope.$apply(function () {
-						console.log(data.lol.user);
 						if (!vm.usersInCurrentChan)
 							vm.usersInCurrentChan = [];
 						var ok = false;
 						if ($.inArray(data.lol.user, vm.usersInCurrentChan) == -1)
 							ok = true
-						console.log(ok);
 						if (ok)
 							vm.usersInCurrentChan.push(data.lol.user);
-						console.log(vm.usersInCurrentChan);// clean if /users again
 					})
 			});
 
@@ -76,7 +73,6 @@
 			vm.socket.on('listChans', function (data) {
 				if (data.chans)
 				{
-					console.log(data.chans);
 					if (!vm.messages[vm.currentChan])
 						vm.messages[vm.currentChan] = [];
 					$scope.$apply(function () {
@@ -86,7 +82,6 @@
 			});
 
 			vm.socket.on('personal', function (data) {
-				console.log(data);
 				if (data.to == vm.mainName || data.to == vm.nick)
 					$scope.$apply(function () {
 					if (!vm.messages[vm.currentChan])
@@ -96,11 +91,17 @@
 			});
 
 			vm.socket.on('global', function (data) {
-					$scope.$apply(function () {
-						if (!vm.messages[vm.currentChan])
-							vm.messages[vm.currentChan] = [];
-						vm.messages[vm.currentChan].push({ from: data.from, content: data.content});
-					});
+				$scope.$apply(function () {
+					if (!vm.messages[vm.currentChan])
+						vm.messages[vm.currentChan] = [];
+					vm.messages[vm.currentChan].push({ from: data.from, content: data.content});
+				});
+			});
+
+			vm.socket.on('logs', function (data) {
+				$scope.$apply(function () {
+					vm.logs = data.log;
+				});
 			});
 			vm.socket.on('setCurrentChan', function (data) {
 				$scope.$apply(function () {
@@ -143,6 +144,7 @@
 				if (vm.usersInCurrentChan)
 					vm.usersInCurrentChan = false;
 				vm.message = "";
+				vm.logs = "";
 			}
 		$(".chat").niceScroll();
 		} // add scrollable to zone
