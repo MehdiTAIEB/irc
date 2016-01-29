@@ -150,7 +150,7 @@ io.on('connection', function (socket) {
 						}
 						break;
 					default:
-						socket.emit('logs', { log: 'unknown command for two parameter command'});
+						socket.emit('logs', { log: 'unknown ' + splittedMessage[0] + ' command for two parameter command'});
 						console.log('unknown command for 2 params');
 				}
 			}
@@ -181,7 +181,7 @@ io.on('connection', function (socket) {
 						}
 						break;
 					default:
-						socket.emit('logs', { log: 'unknown command for one parameter command'});
+						socket.emit('logs', { log: 'unknown ' + splittedMessage[0] + ' command for one parameter command'});
 						console.log('unknown command for one parameter');
 				}
 			}
