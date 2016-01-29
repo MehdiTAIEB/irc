@@ -86,8 +86,16 @@ io.on('connection', function (socket) {
 		else // command interpretation
 		{
 			splittedMessage = data.message.split(" "); // split to check parameter number and get parameters
-			if (splittedMessage.length > 2) // lenght sup a 2 = trop de parametre , if le premier == que /
+			if (splittedMessage.length > 3) // lenght sup a 2 = trop de parametre , if le premier == que /
 				console.log('to many parameter');
+			else if (splittedMessage.length == 3)
+			{
+				cCommand = splittedMessage[0].substr(1);
+				if (cCommand == 'msg')
+					socket.broadcast.emit('personal', { from: socket.mainName, to: splittedMessage[1], content: splittedMessage[2]});
+				console.log(splittedMessage);
+				
+			}
 			else if (splittedMessage.length == 2) // command with parameter
 			{
 				cleanCommand = splittedMessage[0].substr(1);
