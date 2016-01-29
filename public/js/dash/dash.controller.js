@@ -17,7 +17,7 @@
 			vm.joinedChans = [];
 			vm.users = [];
 		
-			vm.socket.on('test', function (data) {
+			vm.socket.on('final', function (data) {
 				if (data.lol.to == vm.mainName)
 					$scope.$apply(function () {
 						console.log(data.lol.user);
@@ -94,6 +94,13 @@
 
 			vm.socket.emit('getChans', {});
 
+			vm.socket.on('leaveChan', function () {
+				$scope.$apply(function () {
+					vm.messages[vm.currentChan] = []; // test
+					vm.currentChan = "home"; //test
+					vm.nick = "";
+				});
+			});
 			vm.socket.on('chans', function (data) {
 				$scope.$apply(function () {
 					vm.chans = data.chans;

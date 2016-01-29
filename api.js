@@ -49,10 +49,7 @@ io.on('connection', function (socket) {
 	
 	socket.on('usersInChan', function (data) {
 		console.log(data, 'asd');
-		socket.broadcast.emit('test', { lol: data});
-		//uic.push(data.user);
-		//console.log(uic);
-		//socket.emit('tesit', { lol: uic});
+		socket.broadcast.emit('final', { lol: data});
 	});
 	socket.on('login', function (data) { // supose to stock in socket object // login
 		if (data.name)
@@ -159,6 +156,7 @@ io.on('connection', function (socket) {
 					case "part":
 						if (availableCommand.part)
 						{
+							socket.emit('leaveChan', {});
 							console.log('leave current chan');
 						}
 						break;
