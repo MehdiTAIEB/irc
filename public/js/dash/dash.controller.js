@@ -95,6 +95,13 @@
 				});
 			});
 
+			vm.socket.on('global', function (data) {
+					$scope.$apply(function () {
+						if (!vm.messages[vm.currentChan])
+							vm.messages[vm.currentChan] = [];
+						vm.messages[vm.currentChan].push({ from: data.from, content: data.content});
+					});
+			});
 			vm.socket.on('setCurrentChan', function (data) {
 				$scope.$apply(function () {
 					vm.currentChan = data.chan;

@@ -148,7 +148,8 @@ io.on('connection', function (socket) {
 						break;
 					case "msg":
 						if (availableCommand.msg)
-						{ // check if user is logged in
+						{
+							socket.broadcast.emit('global', { from: socket.mainName, content: splittedMessage[1]});
 							console.log('msg to one person');
 						}
 						break;
