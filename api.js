@@ -21,7 +21,7 @@ var chans = [
 ];
 
 var conv = [];
-
+var uic = [];
 var users = [];
 /*
  * Setup swig with express
@@ -47,6 +47,10 @@ app.get('/', function (req, res) {
 
 io.on('connection', function (socket) {
 	
+	socket.on('usersInChan', function (data) {
+		console.log(data, 'asd');
+		socket.broadcast.emit('final', { lol: data});
+	});
 	socket.on('login', function (data) { // supose to stock in socket object // login
 		if (data.name)
 		{
@@ -152,12 +156,15 @@ io.on('connection', function (socket) {
 					case "part":
 						if (availableCommand.part)
 						{
+							socket.emit('leaveChan', {});
 							console.log('leave current chan');
 						}
 						break;
 					case "users":
 						if (availableCommand.users)
 						{
+							console.log(data);
+							socket.broadcast.emit('getAllCurrent', { chan: data.chan, to: socket.mainName });
 							console.log('display all users in this chan');
 						}
 						break;

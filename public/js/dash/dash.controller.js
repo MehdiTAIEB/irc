@@ -16,7 +16,27 @@
 			vm.nick = "";
 			vm.joinedChans = [];
 			vm.users = [];
+		
+			vm.socket.on('final', function (data) {
+				if (data.lol.to == vm.mainName)
+					$scope.$apply(function () {
+						console.log(data.lol.user);
+						if (!vm.usersInCurrentChan)
+							vm.usersInCurrentChan = [];
+						var ok = false;
+						if ($.inArray(data.lol.user, vm.usersInCurrentChan) == -1)
+							ok = true
+						console.log(ok);
+						if (ok)
+							vm.usersInCurrentChan.push(data.lol.user);
+						console.log(vm.usersInCurrentChan);// clean if /users again
+					})
+			});
 
+			vm.socket.on('getAllCurrent', function (data) {
+				if (vm.currentChan == data.chan) // if in requested chan send pseudo ??? find a way to store it
+					socket.emit('usersInChan', { user: vm.mainName, to: data.to});
+			});
 			vm.socket.emit('getId', {});
 			vm.socket.on('id', function (data) {
 				if (!vm.mainName)
@@ -74,6 +94,13 @@
 
 			vm.socket.emit('getChans', {});
 
+			vm.socket.on('leaveChan', function () {
+				$scope.$apply(function () {
+					vm.messages[vm.currentChan] = []; // test
+					vm.currentChan = "home"; //test
+					vm.nick = "";
+				});
+			});
 			vm.socket.on('chans', function (data) {
 				$scope.$apply(function () {
 					vm.chans = data.chans;
@@ -95,6 +122,8 @@
 						chan: vm.currentChan
 					});
 				}
+				if (vm.usersInCurrentChan)
+					vm.usersInCurrentChan = false;
 				vm.message = "";
 			}
 		$(".chat").niceScroll();
